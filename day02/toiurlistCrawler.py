@@ -11,6 +11,7 @@ ServiceKey = 'Ody77GLuYeR%2FeFqbpduMN2Bi4Cka2fztbgnj6E2Eux1kUhy3e4epR28XKBUaObiq
 
 # url 접속 요청 후 응답 리턴 함수
 def getRequestUrl(url):
+
     req = urllib.request.Request(url)
 
     try: #request가 끊기면 오류가 생겼을 때, 처리하는 방법 정의
@@ -94,8 +95,12 @@ def main():
     if natName == '':
         print('데이터 전달 실패. 공공데이터포털 서비스 확인요망')
     else:
-        pass
+        #csv 파일 저장
+        columns = ['입국국가','국가코드','입국연월', '입국자수']
+        result_df = pd.DataFrame(result, columns=columns)
+        result_df.to_csv(f'./{natName}_{ed}_{nStartYear}_{dataEnd}.csv', index=False, encoding='utf-8')
 
+        print('csv파일 저장 완료!!')      
 
 if __name__ == '__main__':
     main()
