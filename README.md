@@ -18,7 +18,7 @@
 ## Day 3
 - 웹 크롤링
   - Beautifulsoup
-  - selenium=
+  - selenium
 - 빅데이터 분석
   - 통계 분석
 
