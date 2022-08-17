@@ -64,7 +64,7 @@ class qTemplate(QWidget): # 생성자
         i = 0
         for item in result:
             subtitle = self.strip_tag(item[0]['subtitle'])
-            title = self.strip_tag(item[0]['title'])
+            title = self.strip_tag(item[0]['title']) 
             link = item[0]['link']
             pubDate = item[0]['pubDate']
 
