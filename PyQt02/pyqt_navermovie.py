@@ -16,7 +16,7 @@ class qTemplate(QWidget): # 생성자
     
     def __init__(self) -> None: 
         super().__init__()
-        uic.loadUi('./PyQt02/navernews.ui',self)
+        uic.loadUi('./PyQt02/navermovie.ui',self)
         self.initUi()
     
     def initUi(self) -> None:
@@ -30,13 +30,13 @@ class qTemplate(QWidget): # 생성자
 
     def tblResultSelected(self) -> None:
         selected = self.tblResult.currentRow() # 현재 선택된 열의 인덱스
-        link = self.tblResult.item(selected, 1).text()
+        link = self.tblResult.item(selected, 2).text()
         webbrowser.open(link)
 
     def btnSearchClicked(self) -> None: # 슬롯(이벤트 핸들러)
         jsonResult = []
         totalResult = []
-        keyword = 'news'
+        keyword = 'movie'
         search_word = self.txtSearch.text()
         display_count = 100
 
@@ -53,20 +53,24 @@ class qTemplate(QWidget): # 생성자
 
     def makeTable(self, result):
         self.tblResult.setSelectionMode(QAbstractItemView.SingleSelection)
-        self.tblResult.setColumnCount(2)
+        self.tblResult.setColumnCount(3)
         self.tblResult.setRowCount(len(result)) # displayCount에 따라서 결과값 바뀜. 현재는 50
-        self.tblResult.setHorizontalHeaderLabels(['기사제목', '뉴스링크'])
-        self.tblResult.setColumnWidth(0,350)
+        self.tblResult.setHorizontalHeaderLabels(['영화제목', '상영연도','링크'])
+        self.tblResult.setColumnWidth(0,250)
         self.tblResult.setColumnWidth(1,100)
+        self.tblResult.setColumnWidth(2,350)
         self.tblResult.setEditTriggers(QAbstractItemView.NoEditTriggers) # read only
 
         i = 0
         for item in result:
+            subtitle = self.strip_tag(item[0]['subtitle'])
             title = self.strip_tag(item[0]['title'])
-            link = item[0]['originallink']
+            link = item[0]['link']
+            pubDate = item[0]['pubDate']
 
-            self.tblResult.setItem(i,0,QTableWidgetItem(title))
-            self.tblResult.setItem(i,1,QTableWidgetItem(link))
+            self.tblResult.setItem(i,0,QTableWidgetItem(f'{title} / {subtitle}'))
+            self.tblResult.setItem(i,1,QTableWidgetItem(pubDate))
+            self.tblResult.setItem(i,2,QTableWidgetItem(link))
             i += 1
     
     def strip_tag(self, title): # html 태그를 없애주는 함수
@@ -83,14 +87,13 @@ class qTemplate(QWidget): # 생성자
     def getPostData(self,post):
         temp = []
         title = post['title']
-        description = post['description']
-        originallink = post['originallink']
+        subtitle = post['subtitle']
         link = post['link']
         pubDate = post['pubDate']
 
         temp.append({'title':title
-                    ,'description':description
-                    ,'originallink':originallink
+                    ,'subtitle':subtitle
+                    ,'pubDate':pubDate
                     ,'link':link})
         
         return temp
@@ -117,9 +120,6 @@ class qTemplate(QWidget): # 생성자
             return None
         else:
             return json.loads(ret)
-
-        
-
 
     
 
