@@ -47,4 +47,3 @@
   
   ![네이버 크롤링 결과 ](https://user-images.githubusercontent.com/108312150/185272661-7c69214d-54e8-4d1a-9393-e5040420491a.png)
   
-  https://github.com/qls8044/StudyBigData/commit/d06246a3bbe3b5da7eb5e12d817ed0f0c3622fed
