@@ -44,3 +44,5 @@
 - PyQt5 학습
   - Qt Designer로 UI 생성
   - naver API로 네이버 뉴스, 영화 검색 앱 만들기
+  
+  ![네이버 크롤링 결과화면] (https://raw.githubusercontent.com/qls8044/StudyBigData/31e5954c0776ca766b95b8fae05780cb730ea689/image/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202022-08-18%20103026.png)
